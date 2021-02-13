@@ -17,6 +17,7 @@ import com.bumptech.glide.signature.ObjectKey;
 import com.emon.recyclerviewwithpagination.R;
 import com.emon.recyclerviewwithpagination.model.Result;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -57,7 +58,10 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         viewHolder.titleTV.setText(resultList.get(position).getTitle());
         viewHolder.descriptionTV.setText(resultList.get(position).getOverview());
-        Glide.with(context.getApplicationContext()).asBitmap().placeholder(R.drawable.ic_launcher_foreground).load(BASE_URL_IMG+resultList.get(position).getPosterPath()).into(((ViewHolder) holder).posterIV);
+        Glide.with(context.getApplicationContext())
+                .asBitmap().placeholder(R.drawable.ic_launcher_foreground)
+                .load(BASE_URL_IMG + resultList.get(position).getPosterPath())
+                .into(((ViewHolder) holder).posterIV);
 
     }
 
@@ -106,6 +110,15 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         return resultList.get(position);
     }
 
+    public void setFilter(List<Result> searchMovieList) {
+        // resultList = new ArrayList<>();
+
+        resultList.clear();
+        resultList.addAll(searchMovieList);
+
+        notifyDataSetChanged();
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView titleTV;
         TextView descriptionTV;
@@ -113,9 +126,9 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         ViewHolder(View itemView) {
             super(itemView);
-           titleTV= itemView.findViewById(R.id.titleTV);
-            descriptionTV=itemView.findViewById(R.id.descriptionTV);
-            posterIV=itemView.findViewById(R.id.posterIV);
+            titleTV = itemView.findViewById(R.id.titleTV);
+            descriptionTV = itemView.findViewById(R.id.descriptionTV);
+            posterIV = itemView.findViewById(R.id.posterIV);
 
         }
     }

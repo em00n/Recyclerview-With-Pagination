@@ -1,21 +1,29 @@
 package com.emon.recyclerviewwithpagination.retrofit;
 
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ApiService {
+import com.emon.recyclerviewwithpagination.model.Result;
+import com.emon.recyclerviewwithpagination.model.TopRatedMovies;
 
-        public static final String BaseUrl="https://api.themoviedb.org/3/";
-        private static Retrofit retrofit=null;
+import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.POST;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
-        public static Retrofit getClient(){
-        if (retrofit == null) {
-            retrofit=new Retrofit.Builder()
-                    .baseUrl(BaseUrl)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-        }
-        return retrofit;
-    }
+public interface ApiService {
 
+    @GET("movie/top_rated")
+    Call<TopRatedMovies> getTopRatedMovies(
+            @Query("api_key") String apiKey,
+            @Query("language") String language,
+            @Query("page") int pageIndex
+    );
+
+    @GET("movie/{id}")
+    Call<Result> getDetailsById(
+            @Path("id") int id,
+            @Query("api_key") String apiKey
+
+    );
 }
