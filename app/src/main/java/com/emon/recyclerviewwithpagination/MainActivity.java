@@ -200,7 +200,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 String movieName = result.getTitle().toLowerCase();
                 if (movieName.contains(newText)) {
                     resultArrayList.add(result);
-                    Log.d("BAL", result.getTitle());
+                   
                     adapter.addLoading();
                     adapter.removeLoading();
                     //  isSearching=true;
